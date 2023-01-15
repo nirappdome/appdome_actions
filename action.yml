@@ -59,6 +59,6 @@ runs:
   using: "composite"
   steps:
     - name: Download files
-      run: echo ${{github.event.inputs.keystore_file}}
+      run: echo ${{ inputs.keystore_file }}
       shell: bash
 
