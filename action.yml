@@ -9,10 +9,9 @@ branding:
 runs:
   using: "composite"
   steps:
-    - name: Run dependencies installation
-        run: |
-            ls -l
-            sudo apt update 
-            sudo apt install python3-pip
-            sudo pip3 install -r appdome/requirements.txt
-        shell: bash
+      run: |
+          ls -l
+          sudo apt update 
+          sudo apt install python3-pip
+          sudo pip3 install -r appdome/requirements.txt
+      shell: bash
