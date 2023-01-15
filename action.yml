@@ -5,7 +5,56 @@ description: Use basic flow for Appdome users for build and sign android vanilla
 branding:
   icon: 'bluetooth'
   color: 'blue'
-# Controls when the workflow will run
+
+inputs:
+  Android_vanilla_file:
+    description: 'APK file'
+    # Default value if no value is explicitly provided
+    default: ''
+    # Input has to be provided for the workflow to run
+    required: true
+  Fusion_set_id:
+    description: "Android fusion set id"
+    default: ''
+    required: true
+  sign_otions:
+    type: choice
+    description: Android Sign Options
+    options: 
+    - Appdome Signing
+    - Private Signing
+    - Auto-Dev Private Signing
+    required: true
+  Keystore_file:
+    description: 'Keystore file'
+    default: ''
+    required: false
+  keystore_password:
+    description: 'keystore password'
+    default: ''
+    required: false
+  keystore_alias:
+    description: 'keystore alias'
+    default: ''
+    required: false
+  key_pass:
+    description: 'keystore key password'
+    default: ''
+    required: false
+  signing_fingerprint:
+    description: 'signing sha1 fingerprint'
+    default: ''
+    required: false
+  google_play_signing:
+    description: 'Google Play App Signing program'
+    type: boolean
+    default: false
+    required: false
+  sign_overrids:
+    description: 'Download link for json file with sign overrides'
+    default: ''
+    required: false
+
 runs:
   using: "composite"
   steps:
@@ -16,8 +65,22 @@ runs:
         ref: refs/heads/main
         path: appdome
     - name: My first step
-      run: ls
+      run: mkdir files | mkdir output
       shell: bash
     - name: My first step
       run: sudo apt update | sudo apt install python3-pip | sudo pip3 install -r appdome/requirements.txt
-      shell: bash     
+      shell: bash   
+    - name: Download files
+      run: VAR=${{github.event.inputs.keystore_file}}
+          if [[ $VAR != '' ]]; then
+            echo "Downloading keystore file"
+            wget ${{github.event.inputs.keystore_file}} -O files/file.keystore
+          fi
+          VAR=${{github.event.inputs.sign_overrids}}
+          if [[ $VAR != '' ]]; then
+            echo "Downloading json sign overrides"
+            wget ${{github.event.inputs.sign_overrids}} -O files/sign_overrides.json
+          fi
+          wget ${{github.event.inputs.android_vanilla_file}} -O files/vanilla.apk
+          ls files
+      shell: bash   
