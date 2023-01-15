@@ -9,12 +9,21 @@ branding:
 runs:
   using: "composite"
   steps:
-    - name: My first step
-      run: ls
-      shell: bash
     - name: Cloning appdome-api-python github repository
       uses: actions/checkout@master
       with:
         repository: Appdome/appdome-api-python
         ref: refs/heads/main
         path: appdome
+    - name: My first step
+      run: ls
+      shell: bash
+    - name: My first step
+      run: sudo apt update
+      shell: bash
+    - name: My first step
+      run: sudo apt install python3-pip
+      shell: bash
+    - name: My first step
+      run: sudo pip3 install -r appdome/requirements.txt
+      shell: bash      
