@@ -9,12 +9,6 @@ branding:
 runs:
   using: "composite"
   steps:
-    - name: Cloning appdome-api-python github repository
-        uses: actions/checkout@master
-        with:
-          repository: Appdome/appdome-api-python
-          ref: refs/heads/main
-          path: appdome
     - name: Run dependencies installation
         run: |
             ls -l
