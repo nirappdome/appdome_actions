@@ -19,7 +19,5 @@ runs:
       run: ls
       shell: bash
     - name: My first step
-      run: sudo apt update
-           sudo apt install python3-pip
-           sudo pip3 install -r appdome/requirements.txt
+      run: sudo apt update | sudo apt install python3-pip | sudo pip3 install -r appdome/requirements.txt
       shell: bash     
