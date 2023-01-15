@@ -92,51 +92,12 @@ jobs:
       - name: download files
         run: |
           mkdir files
-          VAR=${{ github.event.inputs.keystore_file }}
-          if [[ $VAR != '' ]]; then
-            echo "Downloading keystore file"
-            wget ${{ github.event.inputs.keystore_file }} -O files/file.keystore
-          fi
-          VAR=${{ github.event.inputs.sign_overrids }}
-          if [[ $VAR != '' ]]; then
-            echo "Downloading json sign overrides"
-            wget ${{ github.event.inputs.sign_overrids }} -O files/sign_overrides.json
-          fi
-          wget ${{ github.event.inputs.android_vanilla_file }} -O files/vanilla.apk
           ls files
       
       # Run appdome api for Android apps
       - name: Appdome workflow for Android apps
         run: |
           mkdir output
-          CHOICE="${{ github.event.inputs.sign_otions }}"
-          if [[ $CHOICE == "Appdome Signing" ]];then
-            VAR=${{ github.event.inputs.sign_overrids }}
-            if [[ -n $VAR ]]; then
-              sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --sign_on_appdome -fs ${{github.event.inputs.fusion_set_id}} --keystore ./files/file.keystore --keystore_pass ${{github.event.inputs.keystore_password}} --keystore_alias ${{github.event.inputs.keystore_alias}} --key_pass ${{github.event.inputs.key_pass}} --sign_overrides files/sign_overrides.json --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-            else
-              sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --sign_on_appdome -fs ${{github.event.inputs.fusion_set_id}} --keystore ./files/file.keystore --keystore_pass ${{github.event.inputs.keystore_password}} --keystore_alias ${{github.event.inputs.keystore_alias}} --key_pass ${{github.event.inputs.key_pass}} --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-            fi
-          elif [[ $CHOICE == "Private Signing" ]];then
-            VAR=${{github.event.inputs.sign_overrids}}
-            if [[ -n $VAR ]]; then
-              VAR=${{github.event.inputs.google_play_signing}}
-              if [ $VAR = true ] ; then
-                sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --private_signing -fs ${{github.event.inputs.fusion_set_id}} --signing_fingerprint ${{github.event.inputs.signing_fingerprint}} --sign_overrides files/sign_overrides.json --google_play_signing --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-              else
-                sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --private_signing -fs ${{github.event.inputs.fusion_set_id}} --signing_fingerprint ${{github.event.inputs.signing_fingerprint}} --sign_overrides files/sign_overrides.json --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-              fi
-            else
-              VAR=${{github.event.inputs.google_play_signing}}
-              if [ $VAR = true ] ; then
-                sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --private_signing -fs ${{github.event.inputs.fusion_set_id}} --signing_fingerprint ${{github.event.inputs.signing_fingerprint}} --google_play_signing --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-              else
-                sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --private_signing -fs ${{github.event.inputs.fusion_set_id}} --signing_fingerprint ${{github.event.inputs.signing_fingerprint}} --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-              fi
-            fi
-          elif [[ $CHOICE == "Auto-Dev Private Signing" ]];then
-            sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --auto_dev_private_signing -fs ${{github.event.inputs.fusion_set_id}} --signing_fingerprint ${{github.event.inputs.signing_fingerprint}} --google_play_signing --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
-          fi
           ls output
           
       # Upload fuse output as an artifacts
