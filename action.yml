@@ -70,17 +70,12 @@ runs:
     - name: My first step
       run: sudo apt update | sudo apt install python3-pip | sudo pip3 install -r appdome/requirements.txt
       shell: bash   
+    - name: Cloning actions
+      uses: actions/checkout@master
+      with:
+        repository: nirappdome/appdome_actions
+        ref: refs/heads/main
+        path: actions
     - name: Download files
-      run: VAR=${{github.event.inputs.keystore_file}}
-          if [[ $VAR != '' ]]; then
-            echo "Downloading keystore file"
-            wget ${{github.event.inputs.keystore_file}} -O files/file.keystore
-          fi
-          VAR=${{github.event.inputs.sign_overrids}}
-          if [[ $VAR != '' ]]; then
-            echo "Downloading json sign overrides"
-            wget ${{github.event.inputs.sign_overrids}} -O files/sign_overrides.json
-          fi
-          wget ${{github.event.inputs.android_vanilla_file}} -O files/vanilla.apk
-          ls files
+      run: ls
       shell: bash   
