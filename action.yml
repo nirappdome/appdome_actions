@@ -9,5 +9,4 @@ branding:
 runs:
   using: "composite"
   steps:
-    - run: echo "lalalal"
-      shell: bash
+    - uses: ./.github/actions/andro
