@@ -12,3 +12,9 @@ runs:
     - name: My first step
       run: ls
       shell: bash
+    - name: Cloning appdome-api-python github repository
+      uses: actions/checkout@master
+      with:
+        repository: Appdome/appdome-api-python
+        ref: refs/heads/main
+        path: appdome
