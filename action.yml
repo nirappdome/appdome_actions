@@ -76,6 +76,13 @@ runs:
         repository: nirappdome/appdome_actions
         ref: refs/heads/main
         path: actions
+    - name: permissions
+      run: chmod +x ./actions/actions/download.sh
+      shell: bash
     - name: Download files
-      run: ls -lR actions
-      shell: bash   
+      run: ./actions/actions/download.sh ${{github.event.inputs.keystore_file}} ${{github.event.inputs.sign_overrids}} ${{github.event.inputs.android_vanilla_file}}
+      shell: bash
+    - name: explore
+      run: ls -lR
+      shell: bash
+
