@@ -2,6 +2,10 @@
 # File location should be under .github/workflows/
 name: Android Fuse Build And Sign
 description: Use basic flow for Appdome users for build and sign android vanilla applications as a part of your ci/cd workflow
+branding:
+  icon: 'award'
+  color: 'green'
+activity
 # Controls when the workflow will run
 on:
   # Allows you to run this workflow manually from the Actions tab
