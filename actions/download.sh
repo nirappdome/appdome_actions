@@ -1,4 +1,5 @@
 mkdir files
+mkdir output
 VAR=$1
 if [[ $VAR != '' ]]; then
   echo "Downloading keystore file"
