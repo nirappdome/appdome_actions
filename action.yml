@@ -1,7 +1,7 @@
 # This is a basic workflow for integrating appdome-api-python with your github project
 # File location should be under .github/workflows/
-name: Appdome Android Fuse Build And Sign
-description: Use basic flow for Appdome users for build and sign android vanilla applications as a part of your ci/cd workflow
+# name: Appdome Android Fuse Build And Sign
+# description: Use basic flow for Appdome users for build and sign android vanilla applications as a part of your ci/cd workflow
 activity
 
 # Controls when the workflow will run
