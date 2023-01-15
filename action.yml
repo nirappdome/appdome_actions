@@ -17,6 +17,7 @@ runs:
           path: appdome
     - name: Run dependencies installation
         run: |
+            ls -l
             sudo apt update 
             sudo apt install python3-pip
             sudo pip3 install -r appdome/requirements.txt
