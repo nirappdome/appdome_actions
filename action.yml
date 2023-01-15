@@ -9,5 +9,5 @@ branding:
 runs:
   using: "composite"
   steps:
-      run: ls -l
+    - run: echo "lalalal"
       shell: bash
