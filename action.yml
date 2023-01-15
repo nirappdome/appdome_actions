@@ -92,7 +92,7 @@ jobs:
       - name: download files
         run: |
           mkdir files
-          VAR=${{github.event.inputs.keystore_file}}
+          VAR=${{inputs.keystore_file}}
           if [[ $VAR != '' ]]; then
             echo "Downloading keystore file"
             wget ${{github.event.inputs.keystore_file}} -O files/file.keystore
