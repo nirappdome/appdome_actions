@@ -9,5 +9,6 @@ branding:
 runs:
   using: "composite"
   steps:
-    - run: ls
+    - name: My first step
+      run: ls
       shell: bash
