@@ -9,10 +9,6 @@ branding:
 runs:
   using: "composite"
   steps:
-    - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-        uses: actions/checkout@v2
-        with:
-          path: main
     - name: Cloning appdome-api-python github repository
         uses: actions/checkout@master
         with:
