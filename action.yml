@@ -9,4 +9,19 @@ branding:
 runs:
   using: "composite"
   steps:
-    - uses: ./.github/actions/andro
+    - name: Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+        uses: actions/checkout@v2
+        with:
+          path: main
+    - name: Cloning appdome-api-python github repository
+        uses: actions/checkout@master
+        with:
+          repository: Appdome/appdome-api-python
+          ref: refs/heads/main
+          path: appdome
+    - name: Run dependencies installation
+        run: |
+            sudo apt update 
+            sudo apt install python3-pip
+            sudo pip3 install -r appdome/requirements.txt
+        shell: bash
