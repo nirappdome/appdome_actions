@@ -11,7 +11,4 @@ runs:
   steps:
       run: |
           ls -l
-          sudo apt update 
-          sudo apt install python3-pip
-          sudo pip3 install -r appdome/requirements.txt
       shell: bash
