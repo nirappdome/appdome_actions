@@ -58,7 +58,27 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Download files
-      run: echo ${{ inputs.keystore_file }}
+    - name: Cloning appdome-api-python github repository
+      uses: actions/checkout@master
+      with:
+        repository: Appdome/appdome-api-python
+        ref: refs/heads/main
+        path: appdome
+    - name: My first step
+      run: sudo apt update | sudo apt install python3-pip | sudo pip3 install -r appdome/requirements.txt
+      shell: bash   
+    - name: Cloning actions
+      uses: actions/checkout@master
+      with:
+        repository: nirappdome/appdome_actions
+        ref: refs/heads/main
+        path: actions
+    - name: permissions
+      run: chmod +x ./actions/actions/download.sh
       shell: bash
-
+    - name: Run action files
+      run: ./actions/actions/download.sh ${{ inputs.keystore_file }} ${{ inputs.sign_overrids }} ${{ inputs.android_vanilla_file }}
+      shell: bash
+    - name: explore
+      run: ls -lR
+      shell: bash
