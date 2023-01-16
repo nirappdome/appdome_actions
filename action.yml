@@ -17,7 +17,7 @@ inputs:
     description: "Android fusion set id"
     default: '!'
     required: true
-  sign_otions:
+  sign_options:
     type: choice
     description: Android Sign Options
     options: 
@@ -76,9 +76,12 @@ runs:
     - name: permissions
       run: chmod +x ./actions/actions/download.sh
       shell: bash
-    - name: Run action files
+    - name: Run download action files
       run: ./actions/actions/download.sh ${{ inputs.keystore_file }} ${{ inputs.sign_overrids }} ${{ inputs.android_vanilla_file }}
       shell: bash
     - name: explore
       run: ls -lR
+      shell: bash
+    - name: Run appdome bash action files
+      run: ./actions/actions/appdome_build_sign.sh ${{ inputs.sign_options }} ${{ inputs.sign_overrids }} ${{ inputs.google_play_signing }} ${{ inputs.fusion_set_id }} ${{ inputs.keystore_password }} ${{ inputs.keystore_alias }} ${{ inputs.key_pass }} ${{ inputs.signing_fingerprint }}
       shell: bash
