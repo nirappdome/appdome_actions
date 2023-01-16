@@ -76,7 +76,7 @@ runs:
     - name: Cloning actions
       uses: actions/checkout@master
       with:
-        repository: nirappdome/appdome_actions
+        repository: nirappdome/appdome_android_action
         ref: refs/heads/main
         path: actions
     - name: permissions
