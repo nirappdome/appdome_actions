@@ -10,12 +10,12 @@ inputs:
   Android_vanilla_file:
     description: 'APK file'
     # Default value if no value is explicitly provided
-    default: ''
+    default: '!'
     # Input has to be provided for the workflow to run
     required: true
   Fusion_set_id:
     description: "Android fusion set id"
-    default: ''
+    default: '!'
     required: true
   sign_otions:
     type: choice
@@ -27,23 +27,23 @@ inputs:
     required: true
   Keystore_file:
     description: 'Keystore file'
-    default: ''
+    default: '!'
     required: false
   keystore_password:
     description: 'keystore password'
-    default: ''
+    default: '!'
     required: false
   keystore_alias:
     description: 'keystore alias'
-    default: ''
+    default: '!'
     required: false
   key_pass:
     description: 'keystore key password'
-    default: ''
+    default: '!'
     required: false
   signing_fingerprint:
     description: 'signing sha1 fingerprint'
-    default: ''
+    default: '!'
     required: false
   google_play_signing:
     description: 'Google Play App Signing program'
@@ -52,7 +52,7 @@ inputs:
     required: false
   sign_overrids:
     description: 'Download link for json file with sign overrides'
-    default: ''
+    default: '!'
     required: false
 
 runs:
