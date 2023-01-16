@@ -34,6 +34,6 @@ elif [[ $CHOICE == "Private_Signing" ]];then
     fi
   fi
 elif [[ $CHOICE == "Auto_Dev_Private_Signing" ]];then
-  sudo python3 appdome/appdome-api-python/appdome_api.py -key ${{secrets.APPDOME_API_KEY}} --app ./files/vanilla.apk --auto_dev_private_signing -fs ${args[3]} --signing_fingerprint ${args[7]} --google_play_signing --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
+  sudo python3 appdome/appdome-api-python/appdome_api.py -key ${args[8]} --app ./files/vanilla.apk --auto_dev_private_signing -fs ${args[3]} --signing_fingerprint ${args[7]} --google_play_signing --output ./output/appdome_vanilla.apk --certificate_output ./output/certificate.pdf
 fi
 ls output
