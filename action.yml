@@ -7,6 +7,12 @@ branding:
   color: 'blue'
 
 inputs:
+  appdome_key:
+    description: 'Appdome API key'
+    # Default value if no value is explicitly provided
+    default: '!'
+    # Input has to be provided for the workflow to run
+    required: true
   Android_vanilla_file:
     description: 'APK file'
     # Default value if no value is explicitly provided
@@ -83,7 +89,7 @@ runs:
       run: ls -lR
       shell: bash
     - name: Run appdome bash action files
-      run: ./actions/actions/appdome_build_sign.sh ${{ inputs.sign_options }} ${{ inputs.sign_overrids }} ${{ inputs.google_play_signing }} ${{ inputs.fusion_set_id }} ${{ inputs.keystore_password }} ${{ inputs.keystore_alias }} ${{ inputs.key_pass }} ${{ inputs.signing_fingerprint }}
+      run: ./actions/actions/appdome_build_sign.sh ${{ inputs.sign_options }} ${{ inputs.sign_overrids }} ${{ inputs.google_play_signing }} ${{ inputs.fusion_set_id }} ${{ inputs.keystore_password }} ${{ inputs.keystore_alias }} ${{ inputs.key_pass }} ${{ inputs.signing_fingerprint }} ${{ inputs.appdome_key }}
       shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
