@@ -74,7 +74,7 @@ runs:
         ref: refs/heads/main
         path: actions
     - name: permissions
-      run: chmod +x ./actions/actions/download.sh
+      run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.sh
       shell: bash
     - name: Run download action files
       run: ./actions/actions/download.sh ${{ inputs.keystore_file }} ${{ inputs.sign_overrids }} ${{ inputs.android_vanilla_file }}
