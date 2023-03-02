@@ -35,6 +35,14 @@ inputs:
     description: 'Keystore file'
     default: '!'
     required: false
+  MOBILE_PROVISION_PROFILE_FILE:
+    description: 'Download link for Provisioning Profiles file'
+    default: '!'
+    required: true
+  ENTITLEMENTS_FILE:
+    description: 'Download link for entitlements file'
+    default: '!'
+    required: false
   KEYSTORE_PASSWORD:
     description: 'keystore password'
     default: '!'
@@ -80,10 +88,10 @@ runs:
         ref: refs/heads/main
         path: actions
     - name: permissions
-      run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.sh
+      run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.sh | chmod +x ./actions/actions/files_manager.py
       shell: bash
     - name: Run download action files
-      run: ./actions/actions/download.sh ${{ inputs.KEYSTORE_FILE }} ${{ inputs.sign_overrids }} ${{ inputs.appFile }}
+      run: ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ input.MOBILE_PROVISION_PROFILE_FILE }} ${{ input.ENTITLEMENTS_FILE }}
       shell: bash
     - name: explore
       run: ls -lR
