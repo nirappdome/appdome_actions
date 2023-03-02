@@ -38,7 +38,7 @@ inputs:
   MOBILE_PROVISION_PROFILE_FILE:
     description: 'Download link for Provisioning Profiles file'
     default: '!'
-    required: true
+    required: false
   ENTITLEMENTS_FILE:
     description: 'Download link for entitlements file'
     default: '!'
