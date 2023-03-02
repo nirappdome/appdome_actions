@@ -7,19 +7,19 @@ branding:
   color: 'blue'
 
 inputs:
-  appdome_key:
+  APPDOME_API_TOKEN:
     description: 'Appdome API key'
     # Default value if no value is explicitly provided
     default: '!'
     # Input has to be provided for the workflow to run
     required: true
-  Android_vanilla_file:
+  appFile:
     description: 'APK file'
     # Default value if no value is explicitly provided
     default: '!'
     # Input has to be provided for the workflow to run
     required: true
-  Fusion_set_id:
+  FUSION_SET_ID:
     description: "Android fusion set id"
     default: '!'
     required: true
@@ -31,33 +31,33 @@ inputs:
     - Private Signing
     - Auto-Dev Private Signing
     required: true
-  Keystore_file:
+  KEYSTORE_FILE:
     description: 'Keystore file'
     default: '!'
     required: false
-  keystore_password:
+  KEYSTORE_PASSWORD:
     description: 'keystore password'
     default: '!'
     required: false
-  keystore_alias:
+  KEYSTORE_ALIAS:
     description: 'keystore alias'
     default: '!'
     required: false
-  key_pass:
+  KEYSTORE_KEY_PASSWORD:
     description: 'keystore key password'
     default: '!'
     required: false
-  signing_fingerprint:
+  SIGN_FINGERPRINT:
     description: 'signing sha1 fingerprint'
     default: '!'
     required: false
-  google_play_signing:
+  google-play-signing:
     description: 'Google Play App Signing program'
     type: boolean
     default: false
     required: false
-  sign_overrids:
-    description: 'Download link for json file with sign overrides'
+  team-id:
+    description: 'Insert your team-id. This line is optional and may be removed when working on a personal workspace.'
     default: '!'
     required: false
 
@@ -83,13 +83,13 @@ runs:
       run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.sh
       shell: bash
     - name: Run download action files
-      run: ./actions/actions/download.sh ${{ inputs.keystore_file }} ${{ inputs.sign_overrids }} ${{ inputs.android_vanilla_file }}
+      run: ./actions/actions/download.sh ${{ inputs.KEYSTORE_FILE }} ${{ inputs.sign_overrids }} ${{ inputs.appFile }}
       shell: bash
     - name: explore
       run: ls -lR
       shell: bash
     - name: Run appdome bash action files
-      run: ./actions/actions/appdome_build_sign.sh ${{ inputs.sign_options }} ${{ inputs.sign_overrids }} ${{ inputs.google_play_signing }} ${{ inputs.fusion_set_id }} ${{ inputs.keystore_password }} ${{ inputs.keystore_alias }} ${{ inputs.key_pass }} ${{ inputs.signing_fingerprint }} ${{ inputs.appdome_key }}
+      run: ./actions/actions/appdome_build_sign.sh ${{ inputs.sign_options }} ${{ inputs.sign_overrids }} ${{ inputs.google-play-signing }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.SIGN_FINGERPRINT }} ${{ inputs.APPDOME_API_TOKEN }}
       shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
