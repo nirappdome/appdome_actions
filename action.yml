@@ -91,7 +91,7 @@ runs:
       run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.sh | chmod +x ./actions/actions/files_manager.py
       shell: bash
     - name: Run download action files
-      run: ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
+      run: python3 ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
       shell: bash
     - name: explore
       run: ls -lR
