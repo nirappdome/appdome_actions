@@ -14,6 +14,8 @@ import subprocess
 # signing_fingerprint = argv[8]
 sys.path.extend([os.path.join(sys.path[0], '../..')])
 
+new_env = os.environ.copy()
+new_env["APPDOME_CLIENT_HEADR"] = "Github/1.0.0"
 
 def main(argv):
     os.mkdir('./output')
@@ -39,7 +41,7 @@ def main(argv):
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
               f"{provision_profiles} {entitlements}"
 
-        subprocess.check_output([i for i in cmd.split(" ") if i != ''])
+        subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
 
     elif sign_option == 'PRIVATE_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] != "false" else ""
@@ -50,7 +52,7 @@ def main(argv):
               f"--output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles}"
 
-        subprocess.check_output([i for i in cmd.split(" ") if i != ''])
+        subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
 
     elif sign_option == 'AUTO_DEV_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] else ""
@@ -60,7 +62,7 @@ def main(argv):
               f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
               f"--output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}"
-        subprocess.check_output([i for i in cmd.split(" ") if i != ''])
+        subprocess.check_output([i for i in cmd.split(" ") if i != ''], env=new_env)
     else:
         print("Signing option not found!\nValid signs: AUTO_SIGNING/PRIVATE_SIGNING/AUTO_DEV_SIGNING")
 
