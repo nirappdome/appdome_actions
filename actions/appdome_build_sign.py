@@ -38,7 +38,7 @@ def main(argv):
               f"--keystore_pass {keystore_pass} --output ./output/appdome_vanilla{app_extension} " \
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
               f"{provision_profiles} {entitlements}"
-
+        print(f"Running the command:\n {cmd}")
         subprocess.check_output(cmd.split(" "))
 
     elif sign_option == 'PRIVATE_SIGNING':
