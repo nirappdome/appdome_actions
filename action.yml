@@ -1,6 +1,6 @@
 # This is a basic workflow for integrating appdome-api-python with your github project
 # File location should be under .github/workflows/
-name: NirAlon Test
+name: Appdome buid-2secure
 description: Use basic flow for Appdome users for build and sign android vanilla applications as a part of your ci/cd workflow activity
 branding:
   icon: 'bluetooth'
@@ -71,6 +71,8 @@ inputs:
 
 runs:
   using: "composite"
+  environment: 
+      APPDOME_CLIENT_HEADER: "Github/1.0.0"
   steps:
     - name: Cloning appdome-api-python github repository
       uses: actions/checkout@master
@@ -78,7 +80,7 @@ runs:
         repository: Appdome/appdome-api-python
         ref: refs/heads/main
         path: appdome
-    - name: My first step
+    - name: Install requirements
       run: sudo apt update | sudo apt install python3-pip | sudo pip3 install -r appdome/requirements.txt
       shell: bash   
     - name: Cloning actions
@@ -92,9 +94,6 @@ runs:
       shell: bash
     - name: Run download action files
       run: python3 ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
-      shell: bash
-    - name: explore
-      run: ls -lR
       shell: bash
     - name: Run appdome bash action files
       run: python3 ./actions/actions/appdome_build_sign.py ${{ inputs.sign_options }} ${{ inputs.APPDOME_API_TOKEN }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.team-id }} ${{ inputs.google-play-signing }} ${{ inputs.SIGN_FINGERPRINT }} 
