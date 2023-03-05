@@ -95,8 +95,6 @@ runs:
       shell: bash
     - name: Run appdome bash action files
       run: python3 ./actions/actions/appdome_build_sign.py ${{ inputs.sign_options }} ${{ inputs.APPDOME_API_TOKEN }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.team-id }} ${{ inputs.google-play-signing }} ${{ inputs.SIGN_FINGERPRINT }} 
-      env: 
-      APPDOME_CLIENT_HEADER: "Github/1.0.0"
       shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
