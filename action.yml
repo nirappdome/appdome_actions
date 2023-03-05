@@ -88,7 +88,7 @@ runs:
         ref: refs/heads/main
         path: actions
     - name: permissions
-      run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.sh | chmod +x ./actions/actions/files_manager.py
+      run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.py | chmod +x ./actions/actions/files_manager.py
       shell: bash
     - name: Run download action files
       run: python3 ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
@@ -97,7 +97,7 @@ runs:
       run: ls -lR
       shell: bash
     - name: Run appdome bash action files
-      run: ./actions/actions/appdome_build_sign.sh ${{ inputs.sign_options }} ${{ inputs.sign_overrids }} ${{ inputs.google-play-signing }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.SIGN_FINGERPRINT }} ${{ inputs.APPDOME_API_TOKEN }}
+      run: python3 ./actions/actions/appdome_build_sign.py ${{ inputs.sign_options }} ${{ inputs.APPDOME_API_TOKEN }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.team-id }} ${{ inputs.google-play-signing }} ${{ inputs.SIGN_FINGERPRINT }} 
       shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
