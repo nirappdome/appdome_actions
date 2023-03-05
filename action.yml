@@ -71,7 +71,7 @@ inputs:
 
 runs:
   using: "composite"
-  environment: 
+  env: 
       APPDOME_CLIENT_HEADER: "Github/1.0.0"
   steps:
     - name: Cloning appdome-api-python github repository
