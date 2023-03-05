@@ -42,12 +42,12 @@ def main(argv):
         subprocess.check_output([i for i in cmd.split(" ") if i != ''])
 
     elif sign_option == 'PRIVATE_SIGNING':
-        google_play_signing = f"--google_play_signing" if argv[7] else ""
+        google_play_signing = f"--google_play_signing" if argv[7] != "false" else ""
         signing_fingerprint = f"--signing_fingerprint ${argv[8]}" if argv[8] != "!" else ""
 
-        cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key}" \
-              f"--app {app_file[0]} --private_signing -fs {fusion_set} {team_id}" \
-              f"--output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf" \
+        cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
+              f"--app {app_file[0]} --private_signing -fs {fusion_set} {team_id} " \
+              f"--output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles}"
 
         subprocess.check_output([i for i in cmd.split(" ") if i != ''])
@@ -57,8 +57,8 @@ def main(argv):
         signing_fingerprint = f"--signing_fingerprint ${argv[8]}" if argv[8] != "!" else ""
         
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
-              f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id}" \
-              f"--output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf" \
+              f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
+              f"--output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf " \
               f"{google_play_signing} {signing_fingerprint} {provision_profiles} {entitlements}"
         subprocess.check_output([i for i in cmd.split(" ") if i != ''])
     else:
