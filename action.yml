@@ -88,7 +88,7 @@ runs:
         ref: refs/heads/main
         path: actions
     - name: permissions
-      run: chmod +x ./actions/actions/download.sh | chmod +x ./actions/actions/appdome_build_sign.py | chmod +x ./actions/actions/files_manager.py
+      run: chmod +x ./actions/actions/appdome_build_sign.py | chmod +x ./actions/actions/files_manager.py
       shell: bash
     - name: Run download action files
       run: python3 ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
