@@ -1,7 +1,6 @@
-# This is a basic workflow for integrating appdome-api-python with your github project
-# File location should be under .github/workflows/
+# TODO
 name: Appdome buid-2secure
-description: Use basic flow for Appdome users for build and sign android vanilla applications as a part of your ci/cd workflow activity
+description: TODO
 branding:
   icon: 'bluetooth'
   color: 'blue'
@@ -9,21 +8,17 @@ branding:
 inputs:
   APPDOME_API_TOKEN:
     description: 'Appdome API key'
-    # Default value if no value is explicitly provided
     default: '!'
-    # Input has to be provided for the workflow to run
     required: true
-  appFile:
+  APP_FILE:
     description: 'APK file'
-    # Default value if no value is explicitly provided
     default: '!'
-    # Input has to be provided for the workflow to run
     required: true
   FUSION_SET_ID:
-    description: "Android fusion set id"
+    description: "Appdome Fusion Set Id"
     default: '!'
     required: true
-  sign_options:
+  SIGN_OPTIONS:
     type: choice
     description: Android Sign Options
     options: 
@@ -36,15 +31,15 @@ inputs:
     default: '!'
     required: false
   MOBILE_PROVISION_PROFILE_FILE:
-    description: 'Download link for Provisioning Profiles file'
+    description: ''
     default: '!'
     required: false
   ENTITLEMENTS_FILE:
-    description: 'Download link for entitlements file'
+    description: ''
     default: '!'
     required: false
   KEYSTORE_PASSWORD:
-    description: 'keystore password'
+    description: ''
     default: '!'
     required: false
   KEYSTORE_ALIAS:
@@ -59,12 +54,12 @@ inputs:
     description: 'signing sha1 fingerprint'
     default: '!'
     required: false
-  google-play-signing:
+  GOOGLE-PLAY-SIGNING:
     description: 'Google Play App Signing program'
     type: boolean
     default: false
     required: false
-  team-id:
+  TEAM-ID:
     description: 'Insert your team-id. This line is optional and may be removed when working on a personal workspace.'
     default: '!'
     required: false
@@ -91,10 +86,10 @@ runs:
       run: chmod +x ./actions/actions/appdome_build_sign.py | chmod +x ./actions/actions/files_manager.py
       shell: bash
     - name: Run download action files
-      run: python3 ./actions/actions/files_manager.py ${{ inputs.appFile }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
+      run: python3 ./actions/actions/files_manager.py ${{ inputs.APP_FILE }} ${{ inputs.KEYSTORE_FILE }} ${{ inputs.MOBILE_PROVISION_PROFILE_FILE }} ${{ inputs.ENTITLEMENTS_FILE }}
       shell: bash
     - name: Run appdome bash action files
-      run: python3 ./actions/actions/appdome_build_sign.py ${{ inputs.sign_options }} ${{ inputs.APPDOME_API_TOKEN }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.team-id }} ${{ inputs.google-play-signing }} ${{ inputs.SIGN_FINGERPRINT }} 
+      run: python3 ./actions/actions/appdome_build_sign.py ${{ inputs.SIGN_OPTIONS }} ${{ inputs.APPDOME_API_TOKEN }} ${{ inputs.FUSION_SET_ID }} ${{ inputs.KEYSTORE_PASSWORD }} ${{ inputs.KEYSTORE_ALIAS }} ${{ inputs.KEYSTORE_KEY_PASSWORD }} ${{ inputs.TEAM-ID }} ${{ inputs.GOOGLE-PLAY-SIGNING }} ${{ inputs.SIGN_FINGERPRINT }} 
       shell: bash
     - name: Upload artifacts
       uses: actions/upload-artifact@v3
