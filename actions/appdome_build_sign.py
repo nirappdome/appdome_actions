@@ -54,7 +54,7 @@ def main(argv):
 
     elif sign_option == 'AUTO_DEV_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] else ""
-        signing_fingerprint = f"--signing_fingerprint ${argv[8]}" if argv[8] != "!" else ""
+        signing_fingerprint = f"--signing_fingerprint {argv[8]}" if argv[8] != "!" else ""
         
         cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} " \
               f"--app {app_file[0]} --auto_dev_private_signing -fs {fusion_set} {team_id} " \
