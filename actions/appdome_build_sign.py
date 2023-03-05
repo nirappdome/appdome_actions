@@ -39,7 +39,7 @@ def main(argv):
               f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
               f"{provision_profiles} {entitlements}"
 
-        subprocess.check_output(cmd.split(" "))
+        subprocess.check_output([i for i in cmd.split(" ") if i != ''])
 
     elif sign_option == 'PRIVATE_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] else ""
