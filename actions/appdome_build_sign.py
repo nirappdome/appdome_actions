@@ -1,6 +1,7 @@
 import glob
 import sys
 import os
+import subprocess
 
 # sign_option = argv[0]
 # appdome_api_key = argv[1]
@@ -32,11 +33,13 @@ def main(argv):
         keystore_alias = f"--keystore_alias {argv[4]}" if argv[4] != "!" else ""
         keystore_key_pass = f"--key_pass {argv[5]}" if argv[5] != "!" else ""
 
-        os.system(f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key}"
-                  f" --app {app_file[0]} --sign_on_appdome -fs {fusion_set} {team_id}"
-                  f" --keystore {keystore_file[0]} --keystore_pass {keystore_pass}"
-                  f" --output ./output/appdome_vanilla{app_extension} --certificate_output ./output/certificate.pdf"
-                  f"{keystore_alias} {keystore_key_pass} {provision_profiles} {entitlements}")
+        cmd = f"sudo python3 appdome/appdome-api-python/appdome_api.py -key {appdome_api_key} --app {app_file[0]} " \
+              f"--sign_on_appdome -fs {fusion_set} {team_id} --keystore {keystore_file[0]} " \
+              f"--keystore_pass {keystore_pass} --output ./output/appdome_vanilla{app_extension} " \
+              f"--certificate_output ./output/certificate.pdf {keystore_alias} {keystore_key_pass} " \
+              f"{provision_profiles} {entitlements}"
+
+        subprocess.check_output(cmd.split(" "))
 
     elif sign_option == 'PRIVATE_SIGNING':
         google_play_signing = f"--google_play_signing" if argv[7] else ""
