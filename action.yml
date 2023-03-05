@@ -27,9 +27,9 @@ inputs:
     type: choice
     description: Android Sign Options
     options: 
-    - Appdome Signing
-    - Private Signing
-    - Auto-Dev Private Signing
+    - AUTO_SIGNING
+    - PRIVATE_SIGNING
+    - AUTO_DEV_SIGNING
     required: true
   KEYSTORE_FILE:
     description: 'Keystore file'
